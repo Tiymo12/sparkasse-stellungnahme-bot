@@ -1,0 +1,1 @@
+      : ksv.entries.map((e, i) = ${i+1}: ${e.kind} Åber ${e.amountTEUR} TEUR, erste Rate ${e.firstPayment}, LZ ${e.termMonths} Mon., KN: ${e.borrower}`).join("\n");
