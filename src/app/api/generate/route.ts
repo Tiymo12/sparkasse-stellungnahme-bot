@@ -1,3 +1,18 @@
+type Borrower = {
+  id: string;
+  name: string;
+  family: string;
+  housing: string;
+  jobEmployer: string;
+  employedSince: string;
+  netIncome: string;
+  otherIncomeDesc?: string;
+  otherIncomeAmount?: string;
+  customerSince: string;
+  mainBank: string;
+  accountBehavior: string;
+  currentAddress?: string; // falls du das Feld eingeführt hast
+};
 import OpenAI from "openai";
 import { NextResponse } from "next/server";
 
@@ -10,7 +25,8 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { finType, borrowers, globalData, scoring, risk, securities, ksv } = body;
 
-    const borrowersBlock = borrowers.map((b, idx) => {
+    const borrowersBlock = (borrowers as Borrower[]).map((b: Borrower, idx: number) => {
+
       const addInc = b.otherIncomeDesc && b.otherIncomeAmount
         ? `Weitere Einkünfte: ${b.otherIncomeDesc} i.H.v. EUR ${b.otherIncomeAmount} mtl.`
         : `Weitere Einkünfte: keine/ohne Relevanz`;
